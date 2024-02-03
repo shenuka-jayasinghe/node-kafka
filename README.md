@@ -213,4 +213,40 @@ console.log(`received message: ${eventType.fromBuffer(data.value)}`)
 
 Run the producer and consumer again, and we should be able to see both reading according to the event schema.
 
+All this will be saved to the branch, example2 of this repo.
+
 ### 5.1 Random animals and noises
+
+We can randomise the animal and noise a little bit to check that we can write different kinds of events:
+
+```js
+function getRandomAnimal() {
+    const categories = ['CAT', 'DOG']
+    return categories[Math.floor(Math.random() * categories.length)]
+}
+
+function getRandomeNoise(category){
+   return category === 'DOG' ? 'bark' : 'meow'
+
+}
+
+function queueMessage() {
+    const category = getRandomAnimal()
+    const noise = getRandomeNoise(category)
+    const event = { category, noise}
+    const queuedSuccess = stream.write(eventType.toBuffer(event));
+    if (queuedSuccess) {
+        console.log(`We queued our message!: ${event}`);
+      } else {
+        // Note that this only tells us if the stream's queue is full,
+        // it does NOT tell us if the message got to Kafka!  See below...
+        console.log('Too many messages in our queue already');
+      }
+}
+```
+
+Run your producer and consumer, and hopefully you should see different animals and noises this time.
+
+Well done! Kafka is a difficult topic (pun intended) to learn about. However, we successfully managed to run event data streams using NodeJS.
+
+This tutorial was taught to me by [kriscfoster](https://github.com/kriscfoster/node-kafka-producer-consumer/tree/master)

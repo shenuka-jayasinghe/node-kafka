@@ -13,10 +13,20 @@ const stream = Kafka.Producer.createWriteStream({
   });
 
 // Writes a message to the stream
+function getRandomAnimal() {
+    const categories = ['CAT', 'DOG']
+    return categories[Math.floor(Math.random() * categories.length)]
+}
+
+function getRandomeNoise(category){
+   return category === 'DOG' ? 'bark' : 'meow'
+
+}
 
 function queueMessage() {
-    
-    const event = { category: 'DOG', noise: 'bark'}
+    const category = getRandomAnimal()
+    const noise = getRandomeNoise(category)
+    const event = { category, noise}
     const queuedSuccess = stream.write(eventType.toBuffer(event));
     if (queuedSuccess) {
         console.log(`We queued our message!: ${event}`);
