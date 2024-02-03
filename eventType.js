@@ -1,6 +1,6 @@
 const avro = require('avsc');
 
-export default avro.Type.forSchema({
+module.exports = avro.Type.forSchema({
     type: 'record',
     name: 'Pet',
     fields: [
@@ -10,7 +10,6 @@ export default avro.Type.forSchema({
       },
       {
         name: 'noise', type: 'string'
-    }
+      }
     ]
-  });
-  
+});

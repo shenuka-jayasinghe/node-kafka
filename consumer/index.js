@@ -1,5 +1,6 @@
 console.log('consumer...')
 const Kafka = require('node-rdkafka');
+const eventType = require('../eventType')
 
 
 const consumer = new Kafka.KafkaConsumer({
@@ -14,5 +15,5 @@ consumer.on('ready', () => {
     consumer.subscribe(['test']) //subscribe to topics
     consumer.consume();
 }).on('data', (data) => {
-    console.log(`received message: ${data.value.toString}`)
+    console.log(`received message: ${eventType.fromBuffer(data.value)}`)
 })

@@ -165,6 +165,8 @@ consumer.on('ready', () => {
 
 Check that the the consumer is receiving data from Kafka, and reading the data that is written to Kafka by the producer by starting the producer and consumer in 2 different terminals.
 
+This example will be saved in the example1 branch on this repo.
+
 ## 5. Event Schemas
 
 We can now introduce an schema to our event data using the avsc module.
@@ -197,3 +199,18 @@ In producer/index.js
 ```js
 const eventType = require('../eventType')
 ```
+inside the ```queueMessage()``` function we can add an event before the writing to the stream. And instead of using the ```Buffer``` class from node, we can use the buffer function from AVSC.
+```js
+const event = { category: 'DOG', noise: 'bark'}
+    const queuedSuccess = stream.write(eventType.toBuffer(event));
+```
+
+Similarly, import ```eventType.js``` to the consumer and change the buffer read from node to AVSC:
+
+```js
+console.log(`received message: ${eventType.fromBuffer(data.value)}`)
+```
+
+Run the producer and consumer again, and we should be able to see both reading according to the event schema.
+
+### 5.1 Random animals and noises

@@ -15,9 +15,11 @@ const stream = Kafka.Producer.createWriteStream({
 // Writes a message to the stream
 
 function queueMessage() {
-    const queuedSuccess = stream.write(Buffer.from('Awesome message'));
+    
+    const event = { category: 'DOG', noise: 'bark'}
+    const queuedSuccess = stream.write(eventType.toBuffer(event));
     if (queuedSuccess) {
-        console.log('We queued our message!');
+        console.log(`We queued our message!: ${event}`);
       } else {
         // Note that this only tells us if the stream's queue is full,
         // it does NOT tell us if the message got to Kafka!  See below...
