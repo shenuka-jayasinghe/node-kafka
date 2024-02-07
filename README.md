@@ -1,5 +1,17 @@
 # node-kafka
 
+## Intro 
+
+### Why use Kafka?
+
+When dealing with data in decoupled services like with microservices architecture, we need a shared datasource. However as Sam Newman (author of 'Building Microservices') describes in his foreward to Ben Stopford's book 'Designing Event-Driven Systems' explains;
+
+><em>"A database creates a huge coupling point in your architecture. It becomes difficult to understand what changes can be made to a schema shaed by multiple services".</em>
+
+For example;
+
+Also, if you are dealing with data that you need fast with a CQRS (command query responsibility segregation) pattern, 
+
 ## 1. Setup Kafka:
 
 create a ```docker-compose.yml``` file and configure kafka and zookeeper
