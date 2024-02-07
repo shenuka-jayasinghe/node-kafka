@@ -9,6 +9,7 @@ When dealing with data in decoupled services like with microservices architectur
 ><em>"A database creates a huge coupling point in your architecture. It becomes difficult to understand what changes can be made to a schema shaed by multiple services".</em>
 
 For example;
+<br>
 ![microservices](https://github.com/shenuka-jayasinghe/node-kafka/assets/137282472/59204021-e7bd-4274-a8ab-5857ba91a4bc)
 
 
